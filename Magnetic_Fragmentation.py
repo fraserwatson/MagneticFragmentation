@@ -43,7 +43,7 @@ hmi.peek(draw_grid=True)
 
 # In[4]:
 
-hmi_submap = hmi.submap([-225, -590]*u.arcsec, [-342, -90]*u.arcsec)
+hmi_submap = hmi.submap([-225, -590]*u.arcsec, [-342, -90]*u.arcsec) # Change submap coords in arcsecs from disk centre
 
 submap_data = np.copy(hmi_submap.data)
 
