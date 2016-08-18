@@ -3,7 +3,7 @@
 
 # Import required modules and set up matplotlib display properties. Set up variables.
 
-# In[1]:
+# In[48]:
 
 import astropy.units as u
 import sunpy.map
@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import skimage.measure as ms
 from split_pol_thresh import split_pol_thresh
 from find_regions import find_regions
+from write_props import write_props
 get_ipython().magic('matplotlib notebook')
 plt.rcParams['figure.figsize'] = 11, 11
 plt.rcParams.update({'font.size': 12})
@@ -25,23 +26,23 @@ threshold = 250 # Gauss
 
 # Load magnetogram data into a SunPy map object.
 
-# In[2]:
+# In[3]:
 
-file_to_load = '' # insert HMI FITS file path between quotes
+file_to_load = '/Users/fraser/Data/HMImag/hmi.M_720s.20160708_000000_TAI.3.magnetogram.fits' # insert HMI FITS file path between quotes
 
 hmi = sunpy.map.Map(file_to_load)
 
 
 # Display HMI magnetogram with coordinate grid overplotted.
 
-# In[3]:
+# In[5]:
 
 hmi.peek(draw_grid=True)
 
 
 # Create submap and split submap into positive and negative magnetic field so that fragments can be found independently using the same code.
 
-# In[4]:
+# In[6]:
 
 hmi_submap = hmi.submap([-225, -590]*u.arcsec, [-342, -90]*u.arcsec) # Change submap coords in arcsecs from disk centre
 
@@ -58,7 +59,7 @@ pos_data = split_pol_thresh(submap_data, threshold, 'pos')
 neg_data = split_pol_thresh(submap_data, threshold, 'neg')
 
 
-# In[30]:
+# In[7]:
 
 pos_region_frame, num_pos_regions = find_regions(pos_data)
 neg_region_frame, num_neg_regions = find_regions(neg_data)
@@ -87,3 +88,19 @@ for region in neg_properties:
 # Save the positive and negative region data in a file format suitable for parsing in time.
 # 
 # Build tracking algorithm to catalogue the fragments temporally.
+
+# In[51]:
+
+write_props(pos_properties, 'p', 1, hmi.date)
+write_props(neg_properties, 'n', 1, hmi.date)
+
+
+# In[45]:
+
+a = '{num:04d}'.format(num=1)
+
+
+# In[52]:
+
+pos_properties.
+
