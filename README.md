@@ -12,5 +12,4 @@ The code currently requires the following modules:
 * skimage (a scientific image analysis module)
 
 Next to do:
-* Save the positive and negative region data in a file format suitable for parsing in time.
 * Build tracking algorithm to catalogue the fragments temporally.
