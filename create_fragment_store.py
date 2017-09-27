@@ -3,11 +3,13 @@
 
 # In[3]:
 
+# The datetime library gives us an easy way to manage dates and times in the code
+from datetime import datetime
+# Pickle lets us save objects to disk that can be loaded back into other python routines later on
+import pickle
 from os import listdir
 from fragment_file_reader import fragment_file_reader
-from datetime import datetime
 from find_closest_fragment import find_closest_fragment
-import pickle
 
 # What directory are the text files stored in?
 basedir = '/Users/fraser/Github/MagneticFragmentation/fragment_properties/'
@@ -28,15 +30,19 @@ pos_store_number = 0
 # For the first image, there is no previous timestep to compare against. All fragments are put into the store.
 [neg_dates, neg_latitudes, neg_longitudes] = fragment_file_reader(neg_files[0])
 
+# For each fragment from the first image, create a new fragment record in the dictionary. Keys start at '0' and
+# go up one every time a new fragment is added
 for i in range(len(neg_dates)):
     neg_store[str(neg_store_number)] = [neg_dates[i]], [neg_latitudes[i]], [neg_longitudes[i]]
     neg_store_number += 1
 
+# Do the same thing for the positive fragment data
 [pos_dates, pos_latitudes, pos_longitudes] = fragment_file_reader(pos_files[0])
 
 for i in range(len(pos_dates)):
     pos_store[str(pos_store_number)] = [pos_dates[i]], [pos_latitudes[i]], [pos_longitudes[i]]
     pos_store_number += 1
+
 
 # For each subsequent image (using the negative file number to keep track, but the positive one is the same)
 for image in range(1, len(neg_files)):
@@ -98,6 +104,7 @@ for image in range(1, len(neg_files)):
                 break
         
         else:
+            # If no old fragments are close enough, create a new record for this new fragment
             neg_store[str(neg_store_number)] = [neg_dates_new[fragment]], [neg_latitudes_new[fragment]], [neg_longitudes_new[fragment]]
             neg_store_number += 1
 
@@ -127,6 +134,7 @@ for image in range(1, len(neg_files)):
                 break
         
         else:
+            # If no old fragments are close enough, create a new record for this new fragment
             pos_store[str(pos_store_number)] = [pos_dates_new[fragment]], [pos_latitudes_new[fragment]], [pos_longitudes_new[fragment]]
             pos_store_number += 1
 
