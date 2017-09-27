@@ -3,7 +3,7 @@
 
 # Import required modules and set up matplotlib display properties. Set up variables.
 
-# In[10]:
+# In[1]:
 
 import astropy.units as u
 import sunpy.map
@@ -26,16 +26,16 @@ datapath = '/Users/fraser/Data/HMImag/' #location of the input data files
 
 # Load magnetogram paths.
 
-# In[5]:
+# In[2]:
 
 files_to_load = os.listdir(datapath)
 
 
 # Loop over files to find fragments and create text document that represents the properties of fragments in each image file.
 
-# In[31]:
+# In[3]:
 
-for image in range(1):#len(files_to_load)):
+for image in range(len(files_to_load)):
     # Create the full filepath of the FITS file
     filename = datapath + files_to_load[image]
     
@@ -77,17 +77,4 @@ for image in range(1):#len(files_to_load)):
     
     write_props(pos_properties, 'p', image, data.date, pos_submap_area)
     write_props(neg_properties, 'n', image, data.date, neg_submap_area)
-
-
-# In[69]:
-
-from sunpy.coordinates import frames
-
-test_coord = neg_submap_area.pixel_to_world(539 * u.pix, 139 * u.pix)   
-    
-new_coord = test_coord.transform_to(frames.HeliographicStonyhurst)
-
-print(new_coord)
-
-new_coord.lon
 
