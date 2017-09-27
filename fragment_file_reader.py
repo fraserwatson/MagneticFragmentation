@@ -5,12 +5,14 @@
 
 def fragment_file_reader(file):
     
+    # This function takes a file containing fragment data for a single
+    # image and reads out the data into arrays of the correct format.
+    # If the write_props function is changed to add more properties to the files,
+    # this function has to be changed to read those files.
+    
     import csv
     from datetime import datetime
-    
-    # This function takes a file containing fragment data for a single
-    # image and reads out the data into arrays of the correct format
-    
+
     # Initialize variables for dates, latitudes, and longitudes
     dates = []
     latitudes = []
