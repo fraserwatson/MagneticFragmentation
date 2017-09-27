@@ -1,9 +1,12 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[3]:
 
 def find_closest_fragment(lat_new, long_new, lats_old, longs_old, time_delta):
+    
+    # Given a new coordinate, a set of old coordinates, and a timedelta, this function find the closest
+    # coordinate in the old set to the new one back-rotated by timedelta
     
     from rotate_long import rotate_long
     import numpy as np
@@ -16,7 +19,12 @@ def find_closest_fragment(lat_new, long_new, lats_old, longs_old, time_delta):
     for coord in range(len(lats_old)):
         new_coord = np.array([lat_rot, long_rot])
         old_coord = np.array([lats_old[coord], longs_old[coord]])
+        # Calculate the Euclidean distance between the old coordinate and the back-rotated new coordinate
         distances.append(np.linalg.norm(new_coord - old_coord))
     
-    return distances
+    # Convert to numpy array for next operation
+    distances = np.array(distances)
+    
+    # Return the index of the minimum distance i.e. the closest fragment
+    return distances.argmin()
 
