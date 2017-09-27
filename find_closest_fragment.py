@@ -26,5 +26,5 @@ def find_closest_fragment(lat_new, long_new, lats_old, longs_old, time_delta):
     distances = np.array(distances)
     
     # Return the index of the minimum distance i.e. the closest fragment
-    return distances.argmin()
+    return [np.amin(distances), distances.argmin()]
 
