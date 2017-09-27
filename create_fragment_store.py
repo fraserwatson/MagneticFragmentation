@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[5]:
 
 from os import listdir
 from fragment_file_reader import fragment_file_reader
@@ -54,31 +54,84 @@ for image in range(1, len(neg_files)):
     neg_latitudes_old = []
     neg_longitudes_old = []
     for key in neg_store:
-        if neg_store[key][0][0] == neg_date_old:
+        if neg_store[key][0][-1] == neg_date_old:
             # Find which keys in the dictionary contain fragments from the previous image and get their key, lat, and long
             neg_key_list.append(key)
-            neg_latitudes_old.append(neg_store[key][1])
-            neg_longitudes_old.append(neg_store[key][2])
+            neg_latitudes_old.append(neg_store[key][1][-1])
+            neg_longitudes_old.append(neg_store[key][2][-1])
     
     # Reset the positive key list and old lat long lists
     pos_key_list = []
     pos_latitudes_old = []
     pos_longitudes_old = []
     for key in pos_store:
-        if pos_store[key][0][0] == pos_date_old:
+        if pos_store[key][0][-1] == pos_date_old:
             # Find which keys in the dictionary contain fragments from the previous image and get their key, lat, and long
             pos_key_list.append(key)
-            pos_latitudes_old.append(pos_store[key][1])
-            pos_longitudes_old.append(pos_store[key][2])
+            pos_latitudes_old.append(pos_store[key][1][-1])
+            pos_longitudes_old.append(pos_store[key][2][-1])
     
     # Calculate the time difference between the old and new images to remove solar rotation
     time_delta = (neg_dates_new[0] - neg_date_old).seconds/86400
     # For each fragment in the new image, find the closest one in space in the old image
     for fragment in range(len(neg_latitudes_new)):
-        index = find_closest_fragment(neg_latitudes_new[fragment], neg_longitudes_new[fragment], neg_latitudes_old, neg_longitudes_old, time_delta)
+        print(neg_latitudes_old)
+        [distance, index] = find_closest_fragment(neg_latitudes_new[fragment], neg_longitudes_new[fragment], neg_latitudes_old, neg_longitudes_old, time_delta)
+        
+        # Set a maximum reasonable distance based on the timedelta
+        # If fragment is close enough, append it to an old entry
+        # Otherwise, create a new one.
+        if (distance / time_delta) < 5:
+        
+            # Then append that fragments properties to the key of the old one
+            append_key = neg_key_list[index]
+            neg_store[append_key][0].append(neg_dates_new[fragment])
+            neg_store[append_key][1].append(neg_latitudes_new[fragment])
+            neg_store[append_key][2].append(neg_longitudes_new[fragment])
+
+            # And remove that fragment from the 'old' list as only one new can link to one old
+            if len(neg_latitudes_old) > 1:
+                del neg_key_list[index]
+                del neg_latitudes_old[index]
+                del neg_longitudes_old[index]
+            else:
+                break
+        
+        else:
+            neg_store[str(neg_store_number)] = [neg_dates_new[fragment]], [neg_latitudes_new[fragment]], [neg_longitudes_new[fragment]]
+            neg_store_number += 1
+
+    # Calculate the time difference between the old and new images to remove solar rotation
+    time_delta = (pos_dates_new[0] - pos_date_old).seconds/86400
+    # For each fragment in the new image, find the closest one in space in the old image
+    for fragment in range(len(pos_latitudes_new)):
+        [distance, index] = find_closest_fragment(pos_latitudes_new[fragment], pos_longitudes_new[fragment], pos_latitudes_old, pos_longitudes_old, time_delta)
+        
+        # Set a maximum reasonable distance based on the timedelta
+        # If fragment is close enough, append it to an old entry
+        # Otherwise, create a new one.
+        if (distance / time_delta) < 5:
+        
+            # Then append that fragments properties to the key of the old one
+            append_key = pos_key_list[index]
+            pos_store[append_key][0].append(pos_dates_new[fragment])
+            pos_store[append_key][1].append(pos_latitudes_new[fragment])
+            pos_store[append_key][2].append(pos_longitudes_new[fragment])
+
+            # And remove that fragment from the 'old' list as only one new can link to one old
+            if len(pos_latitudes_old) > 1:
+                del pos_key_list[index]
+                del pos_latitudes_old[index]
+                del pos_longitudes_old[index]
+            else:
+                break
+        
+        else:
+            pos_store[str(pos_store_number)] = [pos_dates_new[fragment]], [pos_latitudes_new[fragment]], [pos_longitudes_new[fragment]]
+            pos_store_number += 1
 
 
-# In[2]:
+# In[6]:
 
-print(index)
+neg_store
 
