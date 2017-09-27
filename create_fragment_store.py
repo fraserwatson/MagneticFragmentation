@@ -1,12 +1,13 @@
 
 # coding: utf-8
 
-# In[5]:
+# In[3]:
 
 from os import listdir
 from fragment_file_reader import fragment_file_reader
 from datetime import datetime
 from find_closest_fragment import find_closest_fragment
+import pickle
 
 # What directory are the text files stored in?
 basedir = '/Users/fraser/Github/MagneticFragmentation/fragment_properties/'
@@ -75,7 +76,6 @@ for image in range(1, len(neg_files)):
     time_delta = (neg_dates_new[0] - neg_date_old).seconds/86400
     # For each fragment in the new image, find the closest one in space in the old image
     for fragment in range(len(neg_latitudes_new)):
-        print(neg_latitudes_old)
         [distance, index] = find_closest_fragment(neg_latitudes_new[fragment], neg_longitudes_new[fragment], neg_latitudes_old, neg_longitudes_old, time_delta)
         
         # Set a maximum reasonable distance based on the timedelta
@@ -130,8 +130,16 @@ for image in range(1, len(neg_files)):
             pos_store[str(pos_store_number)] = [pos_dates_new[fragment]], [pos_latitudes_new[fragment]], [pos_longitudes_new[fragment]]
             pos_store_number += 1
 
+# Save the fragment store objects to disk for later analysis
+output = open('negative_fragment_store.pkl', 'wb')
+pickle.dump(neg_store, output)
+output.close()
+output = open('positive_fragment_store.pkl', 'wb')
+pickle.dump(pos_store, output)
+output.close()
 
-# In[6]:
+
+# In[2]:
 
 neg_store
 
