@@ -3,7 +3,9 @@
 
 # In[1]:
 
-def write_props(props, polarity, image_num, image_date):
+def write_props(props, polarity, image_num, image_date, submap):
+    from astropy.coordinates import SkyCoord
+    
     filename = '{num:04d}'.format(num = image_num)+polarity+'.txt'
     f = open(filename, 'w')
     for region in props:
