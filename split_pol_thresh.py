@@ -11,6 +11,7 @@ def split_pol_thresh(data, threshold, polarity):
     
     import numpy as np
     
+    # Create a copy of the data
     output = np.copy(data)
     
     # Check polarity and invert if necessary
