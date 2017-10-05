@@ -5,13 +5,14 @@
 
 # In[1]:
 
-# astropy.units allows us to use physical units throughout the code and easily perform calculations on them
+# astropy.units allows us to use physical units throughout the code and easily
+# perform calculations on them
 import astropy.units as u
-# sunpy.map handles the coordinates of the data we are using so we don't have to
+# sunpy.map handles the coordinates of the data we are using
 import sunpy.map
 # numpy is a package that makes handling arrays much easier
 import numpy as np
-# The SkyCoord object lets us convert between astronomical coordinate systems easily
+# The SkyCoord object lets us convert between astronomical coordinate systems
 from astropy.coordinates import SkyCoord
 # matplotlib.pyplot is the standard plotting tool in python
 import matplotlib.pyplot as plt
@@ -28,9 +29,9 @@ get_ipython().magic('matplotlib notebook')
 plt.rcParams['figure.figsize'] = 11, 11
 plt.rcParams.update({'font.size': 12})
 
-# Choose threshold. Any magnetic fields under this level (in Gauss) will be ignored.
-threshold = 250 # Gauss
-datapath = '/Users/fraser/Data/HMImag/' #location of the input data files
+# Choose threshold. Magnetic fields under this level (Gauss) will be ignored
+threshold = 250  # Gauss
+datapath = '/Users/fraser/Data/HMImag/'  # location of the input data files
 
 
 # Load magnetogram paths.
@@ -49,47 +50,60 @@ files_to_load = os.listdir(datapath)
 for image in range(len(files_to_load)):
     # Create the full filepath of the FITS file
     filename = datapath + files_to_load[image]
-    
+
     # Pull out the data into a SunPy map
     data = sunpy.map.Map(filename)
-    
-    # Choose which part of the image we want to look at using solar coordinates (in arcsecs from disk centre)
-    bl = SkyCoord(-590 * u.arcsec, -342 * u.arcsec) # bl is bottom left corner
-    tr = SkyCoord(-225 * u.arcsec, -90 * u.arcsec)  # tr is top right corner
-    
+
+    # Choose which part of the image we want to look at using solar
+    # coordinates (in arcsecs from disk centre)
+    bl = SkyCoord(-590 * u.arcsec,
+                  -342 * u.arcsec)  # bl is bottom left corner
+    tr = SkyCoord(-225 * u.arcsec,
+                  -90 * u.arcsec)   # tr is top right corner
+
     # Create a submap using those coordinates
-    # We are creating two submaps that are identical because from this point on, all positive polarity data will
-    # be split from negative polarity data
+    # We are creating two submaps that are identical because from
+    # this point on, all positive polarity data will be split from
+    # negative polarity data
     pos_submap_area = data.submap(bl, tr)
     neg_submap_area = data.submap(bl, tr)
-    
-    # Set all of the edge pixels in the submaps to zero. This stops errors in the 'find_regions' function
+
+    # Set all of the edge pixels in the submaps to zero. This stops
+    # errors in the 'find_regions' function
     pos_submap_area.data[0][:] = 0
     pos_submap_area.data[-1][:] = 0
     pos_submap_area.data[:][0] = 0
-    pos_submap_area.data[:][-1] =0
+    pos_submap_area.data[:][-1] = 0
     neg_submap_area.data[0][:] = 0
     neg_submap_area.data[-1][:] = 0
     neg_submap_area.data[:][0] = 0
-    neg_submap_area.data[:][-1] =0
-    
+    neg_submap_area.data[:][-1] = 0
+
     # Strip out all negative data in the positive submap, and vice versa
     pos_submap_data = split_pol_thresh(pos_submap_area.data, threshold, 'pos')
     neg_submap_data = split_pol_thresh(neg_submap_area.data, threshold, 'neg')
-    
+
     # Find the regions in the positive and negative magnetogram data
     pos_region_frame, num_pos_regions = find_regions(pos_submap_data)
     neg_region_frame, num_neg_regions = find_regions(neg_submap_data)
-    
+
     # Convert the data into label frames that scikit-image can use
-    pos_labeled_frame, pos_num_labels = ms.label(pos_region_frame.astype(int), return_num=True, connectivity=2)
-    neg_labeled_frame, neg_num_labels = ms.label(neg_region_frame.astype(int), return_num=True, connectivity=2)
-    
-    # Use the scikit-image method 'regionprops' to get various properties on the fragments in the image data
-    pos_properties = ms.regionprops(pos_labeled_frame, intensity_image=pos_submap_area.data)
-    neg_properties = ms.regionprops(neg_labeled_frame, intensity_image=neg_submap_area.data)
-    
-    # Write the properties to files. Note that to add new properties, do so in the 'write_props' function
+    pos_labeled_frame, pos_num_labels = ms.label(pos_region_frame.astype(int),
+                                                 return_num=True,
+                                                 connectivity=2)
+    neg_labeled_frame, neg_num_labels = ms.label(neg_region_frame.astype(int),
+                                                 return_num=True,
+                                                 connectivity=2)
+
+    # Use the scikit-image method 'regionprops' to get various properties on
+    # the fragments in the image data
+    pos_properties = ms.regionprops(pos_labeled_frame,
+                                    intensity_image=pos_submap_area.data)
+    neg_properties = ms.regionprops(neg_labeled_frame,
+                                    intensity_image=neg_submap_area.data)
+
+    # Write the properties to files. Note that to add new properties,
+    # do so in the 'write_props' function
     write_props(pos_properties, 'p', image, data.date, pos_submap_area)
     write_props(neg_properties, 'n', image, data.date, neg_submap_area)
 

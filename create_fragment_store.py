@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[3]:
+# In[14]:
 
 # The datetime library gives us an easy way to manage dates and times in the code
 from datetime import datetime
@@ -145,9 +145,4 @@ output.close()
 output = open('positive_fragment_store.pkl', 'wb')
 pickle.dump(pos_store, output)
 output.close()
-
-
-# In[2]:
-
-neg_store
 
