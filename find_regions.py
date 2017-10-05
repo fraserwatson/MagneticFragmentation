@@ -4,9 +4,9 @@
 # In[1]:
 
 def find_regions(data):
-    
+
     import numpy as np
-    
+
     # Flatten frame into a 1d array
     flat = np.ndarray.flatten(data, 'C')
     # Get the index sort of field values
@@ -15,7 +15,7 @@ def find_regions(data):
     num_pixels = np.count_nonzero(flat)
     # Truncate the index array to that length
     indexorder = indexorder[0:num_pixels]
-    
+
     # Set up region frame
     region_frame = np.zeros(data.shape)
 
@@ -43,7 +43,8 @@ def find_regions(data):
         # Create region array
         reg_values = [regtl, regtm, regtr, regcl, regcr, regbl, regbm, regbr]
 
-        # Assign pixel to region by first checking if any surronding pixels belong to a region
+        # Assign pixel to region by first checking if any surronding pixels
+        # belong to a region
         if max(reg_values) == 0:
             num_regions += 1
             region_frame[row, col] = num_regions
@@ -51,6 +52,6 @@ def find_regions(data):
             reg_values.sort()
             reg_values = np.trim_zeros(reg_values)
             region_frame[row, col] = min(reg_values)
-    
+
     return region_frame, num_regions
 
