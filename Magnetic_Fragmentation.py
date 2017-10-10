@@ -24,10 +24,6 @@ import os
 from split_pol_thresh import split_pol_thresh
 from find_regions import find_regions
 from write_props import write_props
-# The next three lines are for plotting in a Jupyter notebook
-get_ipython().magic('matplotlib notebook')
-plt.rcParams['figure.figsize'] = 11, 11
-plt.rcParams.update({'font.size': 12})
 
 # Choose threshold. Magnetic fields under this level (Gauss) will be ignored
 threshold = 250  # Gauss
