@@ -9,7 +9,7 @@ def write_props(props, polarity, image_num, image_date, submap):
     from sunpy.coordinates import frames
 
     # Create filename using the image_num and polarity
-    filename = '{num:04d}'.format(num=image_num)+polarity+'.txt'
+    filename = '/Users/fraser/Github/MagneticFragmentation/fragment_properties/'+'{0}'.format(image_date.strftime('%Y%m%d_%H%M%S'))+'_'+polarity+'.txt'
 
     # Open filename for writing
     f = open(filename, 'w')
@@ -25,8 +25,9 @@ def write_props(props, polarity, image_num, image_date, submap):
         latlong_coord = arcsecs_coord.transform_to(frames.HeliographicStonyhurst)
         # Record the area (area is NOT deprojected back onto the solar disk)
         area = region.area
+                
         # Write the data to the file
-        f.write('{0}, {1:01.1f}, {2:01.1f}\n'.format(image_date,
+        f.write('{0}, {1:6.1f}, {2:6.1f}, {3:5.0f}\n'.format(image_date,
                                                      latlong_coord.lat.value,
                                                      latlong_coord.lon.value,
                                                      area))
