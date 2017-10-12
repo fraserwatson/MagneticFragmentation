@@ -28,6 +28,7 @@ from write_props import write_props
 # Choose threshold. Magnetic fields under this level (Gauss) will be ignored
 threshold = 250  # Gauss
 datapath = '/Users/fraser/Data/HMImag/'  # location of the input data files
+bulk_region_props_path = '/Users/fraser/Github/MagneticFragmentation/fragment_properties/bulk_props.txt'
 
 
 # Load magnetogram paths.
@@ -100,6 +101,6 @@ for image in range(len(files_to_load)):
 
     # Write the properties to files. Note that to add new properties,
     # do so in the 'write_props' function
-    write_props(pos_properties, 'p', image, data.date, pos_submap_area)
-    write_props(neg_properties, 'n', image, data.date, neg_submap_area)
+    write_props(pos_properties, 'p', image, data.date, pos_submap_area, bulk_region_props_path)
+    write_props(neg_properties, 'n', image, data.date, neg_submap_area, bulk_region_props_path)
 
