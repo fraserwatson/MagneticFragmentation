@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 def write_props(props, polarity, image_num, image_date, submap, bulk_path):
     from astropy.coordinates import SkyCoord
     import astropy.units as u
