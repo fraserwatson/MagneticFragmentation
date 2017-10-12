@@ -3,6 +3,7 @@
 
 # In[1]:
 
+
 def find_regions(data):
 
     import numpy as np
@@ -52,6 +53,7 @@ def find_regions(data):
             reg_values.sort()
             reg_values = np.trim_zeros(reg_values)
             region_frame[row, col] = min(reg_values)
-
-    return region_frame, num_regions
+            
+    # The region_frame array is padded by zeros to a width of one pixel. Return the array without that padding.
+    return region_frame[1:-1, 1:-1], num_regions
 
