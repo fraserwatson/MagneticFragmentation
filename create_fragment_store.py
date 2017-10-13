@@ -80,7 +80,7 @@ for image in range(1, len(neg_files)):
             pos_longitudes_old.append(pos_store[key][2][-1])
     
     # Calculate the time difference between the old and new images to remove solar rotation
-    time_delta = (neg_dates_new[0] - neg_date_old).seconds/86400
+    time_delta = (neg_dates_new[0] - neg_date_old).total_seconds/86400
     # For each fragment in the new image, find the closest one in space in the old image
     for fragment in range(len(neg_latitudes_new)):
         [distance, index] = find_closest_fragment(neg_latitudes_new[fragment], neg_longitudes_new[fragment], neg_latitudes_old, neg_longitudes_old, time_delta)
