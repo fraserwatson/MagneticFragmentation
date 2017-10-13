@@ -77,12 +77,11 @@ HMI_rotated.peek()
 
 # Loop over files to find fragments and create text document that represents the properties of fragments in each image file.
 
-# In[7]:
+# In[36]:
 
 
 # For each image...
-for image in range(115, 119):#, 10):#len(files_to_load)):
-    print(image)
+for image in range(len(files_to_load)):
     # Create the full filepath of the FITS file
     filename = datapath + files_to_load[image]
 
@@ -91,9 +90,9 @@ for image in range(115, 119):#, 10):#len(files_to_load)):
     
     # Transform the initial window coordinates into lat/long coordinates at the time of this image
     # Calculate the timedelta from the original image in days
-    timedelta = (data.date - initial_obs_time).seconds/86400
+    timedelta = (data.date - initial_obs_time).total_seconds()/86400
     [bl, tr] = window_corner_rotation(bl_stonyhurst, tr_stonyhurst, timedelta, data.date)    
-       
+    
     # Create a submap using those coordinates
     # We are creating two submaps that are identical because from
     # this point on, all positive polarity data will be split from
