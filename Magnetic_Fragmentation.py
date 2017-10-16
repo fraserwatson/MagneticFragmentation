@@ -40,7 +40,7 @@ bottom_left = [-120, -50]
 top_right = [120, -230]
 
 datapath = '/Users/fraser/Data/HMImag/20140323/'  # location of the input data files
-bulk_region_props_path = '/Users/fraser/Github/MagneticFragmentation/fragment_properties/bulk_props.txt'
+bulk_region_props_path = '/Users/fraser/Github/MagneticFragmentationOutput/fragment_properties/bulk_props.txt'
 
 
 # Load magnetogram paths.
@@ -129,7 +129,7 @@ for image in range(len(files_to_load)):
     write_props(neg_properties, 'n', image, data.date, neg_submap_area, bulk_region_props_path)
     
     pos_submap_area.plot()
-    imagefilename = 'HMI' + str(image).zfill(4)
+    imagefilename = '/Users/fraser/Github/MagneticFragmentationOutput/fragment_properties/' + 'HMI' + str(image).zfill(4)
     plt.savefig(imagefilename)
     plt.clf()
 
