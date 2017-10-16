@@ -45,7 +45,7 @@ bulk_region_props_path = '/Users/fraser/Github/MagneticFragmentation/fragment_pr
 
 # Load magnetogram paths.
 
-# In[ ]:
+# In[2]:
 
 
 # Get the full filepath of the magnetograms we will be using
@@ -69,7 +69,7 @@ tr_stonyhurst = tr.transform_to(frames.HeliographicStonyhurst)
 
 # Loop over files to find fragments and create text document that represents the properties of fragments in each image file.
 
-# In[ ]:
+# In[3]:
 
 
 # For each image...
@@ -128,7 +128,9 @@ for image in range(len(files_to_load)):
 #     write_props(pos_properties, 'p', image, data.date, pos_submap_area, bulk_region_props_path)
 #     write_props(neg_properties, 'n', image, data.date, neg_submap_area, bulk_region_props_path)
     
-    pos_submap_area.plot()
-    plt.savefig('HMI'+str(image))
-    plt.clf()
+    #pos_submap_area.plot()
+    imagefilename = 'HMI' + str(image).zfill(4)
+    print(imagefilename)
+    #plt.savefig(imagefilename)
+    #plt.clf()
 
