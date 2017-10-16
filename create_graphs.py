@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[42]:
+# In[1]:
 
 
 import matplotlib.pyplot as plt
@@ -23,7 +23,7 @@ negareas = []
 negfluxes = []
 
 # Open file and return arrays for dates (as datetime), latitudes (as float) and longitudes (as float)
-with open('/Users/fraser/Github/MagneticFragmentation/fragment_properties/AR12010/bulk_props.txt', 'r') as csvfile:
+with open('/Users/fraser/Github/MagneticFragmentationOutput/fragment_properties/AR12010/bulk_props.txt', 'r') as csvfile:
     filereader = csv.reader(csvfile, delimiter=',')
     for row in filereader:
         if posnegcounter % 2 == 0:
@@ -39,7 +39,7 @@ with open('/Users/fraser/Github/MagneticFragmentation/fragment_properties/AR1201
         posnegcounter += 1
 
 
-# In[43]:
+# In[2]:
 
 
 fig = plt.figure()
@@ -56,7 +56,7 @@ ax.set_xlabel('Time')
 ax.set_ylabel('Number of fragments')
 
 
-# In[44]:
+# In[5]:
 
 
 fig = plt.figure()
@@ -70,10 +70,10 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
 fig.autofmt_xdate(rotation=90)
 
 ax.set_xlabel('Time')
-ax.set_ylabel('Total fragment area')
+ax.set_ylabel('Total fragment area (square cm)')
 
 
-# In[48]:
+# In[6]:
 
 
 fig = plt.figure()
@@ -87,5 +87,5 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
 fig.autofmt_xdate(rotation=90)
 
 ax.set_xlabel('Time')
-ax.set_ylabel('Total pixel sum')
+ax.set_ylabel('Total flux (Maxwells)')
 
