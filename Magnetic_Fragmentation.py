@@ -28,7 +28,6 @@ from find_regions import find_regions
 from write_props import write_props
 from rotate_long import rotate_long
 from window_corner_rotation import window_corner_rotation
-get_ipython().run_line_magic('matplotlib', 'inline')
 plt.rcParams['figure.figsize'] = 12, 10
 plt.rcParams.update({'font.size': 22})
 
