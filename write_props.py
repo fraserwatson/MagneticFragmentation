@@ -35,7 +35,7 @@ def write_props(props, polarity, image_num, image_date, submap, bulk_path):
             # that is what we need to rotate coordinates in time later on
             latlong_coord = arcsecs_coord.transform_to(frames.HeliographicStonyhurst)
             # Record the area in sqcm (1 pixel at disk centre is 1.31 million square km) deprojected to disk centre
-            area = region.area * 1.31 * np.power(10, 16) * np.cos(np.deg2rad(latlong_coord.lat.value)) * np.cos(np.deg2rad(latlong_coord.lon.value))
+            area = region.area * 1.31 * np.power(10, 16) / (np.cos(np.deg2rad(latlong_coord.lat.value)) * np.cos(np.deg2rad(latlong_coord.lon.value)))
             total_area += area
             # Record the flux in Maxwells
             flux = (np.sum(region.intensity_image) / region.area) * area
