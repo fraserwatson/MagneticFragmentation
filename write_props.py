@@ -65,9 +65,10 @@ def write_props(props, polarity, image_num, image_date, submap, bulk_path):
 
             # Record the flux of each label in Maxwells . Its sum is the total flux of the pixels inside the bounding box
             # If some of these pixels correspong to the opposite polarity, we get back 0s.
+            #Intensity_image gives the value of each pixel inside the bounding box
             # position {12} in the write command
             flux = (np.sum(region.intensity_image) / region.area) * area
-            total_flux += flux Intensity_image gives the value of each pixel inside the bounding box
+            total_flux += flux
 
             # Record the min flux of each label
             # position {13} in the write command
