@@ -18,6 +18,19 @@ def fragment_file_reader(file):
     dates = []
     latitudes = []
     longitudes = []
+area = []
+    eccentricity = []
+    bbox_min_row = []
+    bbox_min_col = []
+    bbox_max_row = []
+    bbox_max_col = []
+    area_bbox = []
+    cen_bbox_row = []
+    cen_bbox_col = []
+    flux = []
+    min_flux = []
+    mean_flux = []
+    max_flux = []
 
     # Open file and return arrays for dates (as datetime), latitudes (as float) and longitudes (as float)
     with open(file, 'r') as csvfile:
@@ -26,6 +39,21 @@ def fragment_file_reader(file):
             dates.append(datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S.%f'))
             latitudes.append(float(row[1]))
             longitudes.append(float(row[2]))
+            area.append(int(row[3]))
+            eccentricity.append(float(row[4]))
+            bbox_min_row.append(int(row[5]))
+            bbox_min_col.append(int(row[6]))
+            bbox_max_row.append(int(row[7]))
+            bbox_max_col.append(int(row[8]))
+            area_bbox.append(int(row[9]))
+            cen_bbox_row.append(float(row[10]))
+            cen_bbox_col.append(float(row[11]))
+            flux.append(float(row[12]))
+            min_flux.append(float(row[13]))
+            mean_flux.append(float(row[14]))
+            max_flux.append(float(row[15]))
     
-    return [dates, latitudes, longitudes]
+    return [dates, latitudes, longitudes, area, eccentricity, bbox_min_row, bbox_min_col, bbox_max_row, 
+            bbox_max_col, area_bbox, cen_bbox_row, cen_bbox_col, flux, min_flux,
+            mean_flux, max_flux]
 

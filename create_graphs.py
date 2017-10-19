@@ -6,7 +6,7 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-get_ipython().run_line_magic('matplotlib', 'inline')
+get_ipython().magic('matplotlib inline')
 plt.rcParams['figure.figsize'] = 12, 10
 plt.rcParams.update({'font.size': 12})
 import csv
