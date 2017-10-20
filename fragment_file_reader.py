@@ -18,7 +18,7 @@ def fragment_file_reader(file):
     dates = []
     latitudes = []
     longitudes = []
-area = []
+    area = []
     eccentricity = []
     bbox_min_row = []
     bbox_min_col = []
@@ -39,7 +39,7 @@ area = []
             dates.append(datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S.%f'))
             latitudes.append(float(row[1]))
             longitudes.append(float(row[2]))
-            area.append(int(row[3]))
+            area.append(float(row[3]))
             eccentricity.append(float(row[4]))
             bbox_min_row.append(int(row[5]))
             bbox_min_col.append(int(row[6]))
