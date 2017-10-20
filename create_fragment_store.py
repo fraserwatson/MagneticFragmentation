@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[14]:
+# In[1]:
 
 
 # The datetime library gives us an easy way to manage dates and times in the code
@@ -13,7 +13,7 @@ from fragment_file_reader import fragment_file_reader
 from find_closest_fragment import find_closest_fragment
 
 # What directory are the text files stored in?
-basedir = '/Users/fraser/Github/MagneticFragmentation/fragment_properties/'
+basedir = '/Users/fraser/Github/MagneticFragmentationOutput/fragment_properties/'
 
 # Get list of files to use
 files = [basedir + i for i in listdir(basedir)]

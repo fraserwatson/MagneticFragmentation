@@ -44,7 +44,7 @@ bulk_region_props_path = '/Users/fraser/Github/MagneticFragmentationOutput/fragm
 
 # Load magnetogram paths.
 
-# In[2]:
+# In[ ]:
 
 
 # Get the full filepath of the magnetograms we will be using
@@ -68,11 +68,11 @@ tr_stonyhurst = tr.transform_to(frames.HeliographicStonyhurst)
 
 # Loop over files to find fragments and create text document that represents the properties of fragments in each image file.
 
-# In[3]:
+# In[ ]:
 
 
 # For each image...
-for image in range(len(files_to_load)):
+for image in range(10):#len(files_to_load)):
     # Create the full filepath of the FITS file
     filename = datapath + files_to_load[image]
 

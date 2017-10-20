@@ -39,7 +39,7 @@ with open('/Users/fraser/Github/MagneticFragmentationOutput/fragment_properties/
         posnegcounter += 1
 
 
-# In[2]:
+# In[3]:
 
 
 fig = plt.figure()
@@ -56,7 +56,7 @@ ax.set_xlabel('Time')
 ax.set_ylabel('Number of fragments')
 
 
-# In[5]:
+# In[4]:
 
 
 fig = plt.figure()
@@ -73,7 +73,7 @@ ax.set_xlabel('Time')
 ax.set_ylabel('Total fragment area (square cm)')
 
 
-# In[6]:
+# In[5]:
 
 
 fig = plt.figure()
