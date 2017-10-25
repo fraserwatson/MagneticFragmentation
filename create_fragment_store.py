@@ -71,19 +71,7 @@ for image in range(1, len(neg_files)):
     neg_key_list = []
     neg_latitudes_old = []
     neg_longitudes_old = []
-#     neg_area_old = []
-#     neg_eccentricity_old = []
-#     neg_bbox_min_row_old = []
-#     neg_bbox_min_col_old = []
-#     neg_bbox_max_row_old = []
-#     neg_bbox_max_col_old = []
-#     neg_area_bbox_old = []
-#     neg_cen_bbox_row_old = []
-#     neg_cen_bbox_col_old = []
-#     neg_flux_old = []
-#     neg_min_flux_old = []
-#     neg_mean_flux_old = []
-#     neg_max_flux_old = []
+
     for key in neg_store:
         if neg_store[key][0][-1] == neg_date_old:
             # Find which keys in the dictionary contain fragments from the previous image and get their key, lat, and long
@@ -95,19 +83,7 @@ for image in range(1, len(neg_files)):
     pos_key_list = []
     pos_latitudes_old = []
     pos_longitudes_old = []
-#     pos_area_old = []
-#     pos_eccentricity_old = []
-#     pos_bbox_min_row_old = []
-#     pos_bbox_min_col_old = []
-#     pos_bbox_max_row_old = []
-#     pos_bbox_max_col_old = []
-#     pos_area_bbox_old = []
-#     pos_cen_bbox_row_old = []
-#     pos_cen_bbox_col_old = []
-#     pos_flux_old = []
-#     pos_min_flux_old = []
-#     pos_mean_flux_old = []
-#     pos_max_flux_old = []
+
     for key in pos_store:
         if pos_store[key][0][-1] == pos_date_old:
             # Find which keys in the dictionary contain fragments from the previous image and get their key, lat, and long
@@ -150,19 +126,7 @@ for image in range(1, len(neg_files)):
                 del neg_key_list[index]
                 del neg_latitudes_old[index]
                 del neg_longitudes_old[index]
-#                 del neg_area_old[index]
-#                 del neg_eccentricity_old[index]
-#                 del neg_bbox_min_row_old[index]
-#                 del neg_box_min_col_old[index]
-#                 del neg_bbox_max_row_old[index]
-#                 del neg_bbox_max_col_old[index]
-#                 del neg_area_bbox_old[index]
-#                 del neg_cen_bbox_row_old[index]
-#                 del neg_cen_bbox_col_old[index]
-#                 del neg_flux_old[index]
-#                 del neg_min_flux_old[index]
-#                 del neg_mean_flux_old[index]
-#                 del neg_max_flux_old[index]
+
             else:
                 break
         
@@ -208,19 +172,7 @@ for image in range(1, len(neg_files)):
                 del pos_key_list[index]
                 del pos_latitudes_old[index]
                 del pos_longitudes_old[index]
-#                 del pos_area_old[index]
-#                 del pos_eccentricity_old[index]
-#                 del pos_bbox_min_row_old[index]
-#                 del pos_box_min_col_old[index]
-#                 del pos_bbox_max_row_old[index]
-#                 del pos_bbox_max_col_old[index]
-#                 del pos_area_bbox_old[index]
-#                 del pos_cen_bbox_row_old[index]
-#                 del pos_cen_bbox_col_old[index]
-#                 del pos_flux_old[index]
-#                 del pos_min_flux_old[index]
-#                 del pos_mean_flux_old[index]
-#                 del pos_max_flux_old[index]
+
             else:
                 break
         
