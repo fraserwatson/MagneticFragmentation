@@ -36,7 +36,7 @@ def fragment_file_reader(file):
     with open(file, 'r') as csvfile:
         filereader = csv.reader(csvfile, delimiter=',')
         for row in filereader:
-            dates.append(datetime.strptime(row[0], '%Y-%m-%d %H:%M:%S.%f'))
+            dates.append(datetime.strptime(row[0][0:19], '%Y-%m-%d %H:%M:%S'))
             latitudes.append(float(row[1]))
             longitudes.append(float(row[2]))
             area.append(float(row[3]))
