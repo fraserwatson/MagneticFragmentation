@@ -1,12 +1,13 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-get_ipython().magic('matplotlib inline')
+import numpy as np
+get_ipython().run_line_magic('matplotlib', 'inline')
 plt.rcParams['figure.figsize'] = 12, 10
 plt.rcParams.update({'font.size': 12})
 import csv
@@ -39,13 +40,23 @@ with open('/Users/fraser/Github/MagneticFragmentationOutput/fragment_properties/
         posnegcounter += 1
 
 
-# In[3]:
+# In[14]:
+
+
+posdates
+
+
+# In[13]:
 
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.plot(posdates, posnums)
 ax.plot(negdates, negnums)
+
+ax.axvline(mdates.strpdate2num('%Y-%m-%d %H:%M:%S')('2014-03-24 07:24:16'), color='r', zorder=0)
+ax.axvline(mdates.strpdate2num('%Y-%m-%d %H:%M:%S')('2014-03-24 11:24:16'), color='g', zorder=0)
+ax.axvline(mdates.strpdate2num('%Y-%m-%d %H:%M:%S')('2014-03-23 23:24:16'), color='b', zorder=0)
 
 ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
 
