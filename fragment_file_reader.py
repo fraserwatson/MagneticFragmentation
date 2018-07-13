@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[11]:
 
 
 def fragment_file_reader(file):
@@ -20,17 +20,27 @@ def fragment_file_reader(file):
     longitudes = []
     area = []
     eccentricity = []
-    bbox_min_row = []
-    bbox_min_col = []
-    bbox_max_row = []
-    bbox_max_col = []
+    bbox_x_min = []
+    bbox_y_min = []
+    bbox_x_max = []
+    bbox_y_max = []
     area_bbox = []
-    cen_bbox_row = []
-    cen_bbox_col = []
+    cen_bbox_y = []
+    cen_bbox_x = []
     flux = []
     min_flux = []
     mean_flux = []
     max_flux = []
+    blos = []
+    min_blos = []
+    mean_blos = []
+    max_blos = []
+    w_cen_y = []
+    w_cen_x = []
+    ori = []
+    major= []
+    minor = []
+    
 
     # Open file and return arrays for dates (as datetime), latitudes (as float) and longitudes (as float)
     with open(file, 'r') as csvfile:
@@ -41,19 +51,30 @@ def fragment_file_reader(file):
             longitudes.append(float(row[2]))
             area.append(float(row[3]))
             eccentricity.append(float(row[4]))
-            bbox_min_row.append(int(row[5]))
-            bbox_min_col.append(int(row[6]))
-            bbox_max_row.append(int(row[7]))
-            bbox_max_col.append(int(row[8]))
+            bbox_x_min.append(float(row[5]))
+            bbox_y_min.append(float(row[6]))
+            bbox_x_max.append(float(row[7]))
+            bbox_y_max.append(float(row[8]))
             area_bbox.append(int(row[9]))
-            cen_bbox_row.append(float(row[10]))
-            cen_bbox_col.append(float(row[11]))
+            cen_bbox_y.append(float(row[10]))
+            cen_bbox_x.append(float(row[11]))
             flux.append(float(row[12]))
             min_flux.append(float(row[13]))
             mean_flux.append(float(row[14]))
             max_flux.append(float(row[15]))
-    
-    return [dates, latitudes, longitudes, area, eccentricity, bbox_min_row, bbox_min_col, bbox_max_row, 
-            bbox_max_col, area_bbox, cen_bbox_row, cen_bbox_col, flux, min_flux,
-            mean_flux, max_flux]
+            blos.append(float(row[16]))
+            min_blos.append(float(row[17]))
+            mean_blos.append(float(row[18]))
+            max_blos.append(float(row[19]))
+            w_cen_y.append(float(row[20]))
+            w_cen_x.append(float(row[21]))
+            ori.append(float(row[22]))
+            major.append(float(row[23]))
+            minor.append(float(row[24]))
+                       
+    return [dates, latitudes, longitudes, area, eccentricity,
+            bbox_x_min, bbox_y_min, bbox_x_max, bbox_y_max, 
+            area_bbox, cen_bbox_x, cen_bbox_y, flux, min_flux, 
+            mean_flux, max_flux, blos, min_blos, mean_blos, max_blos, w_cen_y, w_cen_x,
+            ori, major, minor]
 
