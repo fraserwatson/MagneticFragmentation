@@ -3,7 +3,6 @@
 
 # In[11]:
 
-
 def fragment_file_reader(file):
     
     # This function takes a file containing fragment data for a single
@@ -40,6 +39,8 @@ def fragment_file_reader(file):
     ori = []
     major= []
     minor = []
+    cen_y=[]
+    cen_x=[]
     
 
     # Open file and return arrays for dates (as datetime), latitudes (as float) and longitudes (as float)
@@ -71,10 +72,12 @@ def fragment_file_reader(file):
             ori.append(float(row[22]))
             major.append(float(row[23]))
             minor.append(float(row[24]))
+            cen_y.append(float(row[25]))
+            cen_x.append(float(row[26]))
                        
     return [dates, latitudes, longitudes, area, eccentricity,
             bbox_x_min, bbox_y_min, bbox_x_max, bbox_y_max, 
             area_bbox, cen_bbox_x, cen_bbox_y, flux, min_flux, 
             mean_flux, max_flux, blos, min_blos, mean_blos, max_blos, w_cen_y, w_cen_x,
-            ori, major, minor]
+            ori, major, minor, cen_y, cen_x]
 
