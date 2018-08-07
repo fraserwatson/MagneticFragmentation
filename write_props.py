@@ -1,7 +1,8 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[10]:
+
 
 def write_props(props, polarity, image_num, image_date, submap, act_region, thres, main):
     from astropy.coordinates import SkyCoord
@@ -143,13 +144,21 @@ def write_props(props, polarity, image_num, image_date, submap, act_region, thre
         #position {26} in the write command
         cen_y= region.centroid[1] 
         cen_x= region.centroid[0]
+        
+        #Record weighted_local_centroid, in pixel coordinates
+        # y position {27} in the write command
+        # x position {28} in the write command
+        
+        wcen_y = region.weighted_centroid[1] 
+        wcen_x = region.weighted_centroid[0]
+
 
 
 
 
 
         #Write the data to the file
-        f.write('{0}, {1:.2f}, {2:.2f}, {3:.2f}, {4:.2f}, {5:.2f}, {6:.2f}, {7:.2f}, {8:.2f}, {9:.2f}, {10:.2f}, {11:.2f}, {12:.2f}, {13:.2f},{14:.2f}, {15:.2f}, {16:.2f}, {17:.2f}, {18:.2f}, {19:.2f}, {20:.2f}, {21:.2f}, {22:.1f}, {23:.2f}, {24:.2f}, {25:.2f}, {26:.2f}\n'.format(image_date,
+        f.write('{0}, {1:.2f}, {2:.2f}, {3:.2f}, {4:.2f}, {5:.2f}, {6:.2f}, {7:.2f}, {8:.2f}, {9:.2f}, {10:.2f}, {11:.2f}, {12:.2f}, {13:.2f},{14:.2f}, {15:.2f}, {16:.2f}, {17:.2f}, {18:.2f}, {19:.2f}, {20:.2f}, {21:.2f}, {22:.1f}, {23:.2f}, {24:.2f}, {25:.2f}, {26:.2f},{27:.2f},{28:.2f}\n'.format(image_date,
                                                      latlong_coord.lat.value, latlong_coord.lon.value,
                                                      area,ecc,
                                                      frag_bbox_xy_min.lon.value, frag_bbox_xy_min.lat.value,
@@ -158,7 +167,7 @@ def write_props(props, polarity, image_num, image_date, submap, act_region, thre
                                                      flux, min_flux, mean_flux, max_flux, blos, min_blos, 
                                                      mean_blos, max_blos,
                                                      wc_xy_coord.lat.value, wc_xy_coord.lon.value,
-                                                     ori, major, minor, cen_y, cen_x))  #\n means "new line"
+                                                     ori, major, minor, cen_y, cen_x, wcen_y, wcen_x))  #\n means "new line"
 
 
             
@@ -170,9 +179,4 @@ def write_props(props, polarity, image_num, image_date, submap, act_region, thre
     g = open(bulk_path, 'a')
     g.write('{0}, {1:.0f}, {2:.2f}, {3:.2f}\n'.format(image_date, total_frags, total_area, total_flux))
     g.close()
-
-
-# In[ ]:
-
-
 
